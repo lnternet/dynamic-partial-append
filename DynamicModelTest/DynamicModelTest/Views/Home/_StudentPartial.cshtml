@@ -1,0 +1,14 @@
+﻿@model DynamicModelTest.Models.StudentPartialModel
+
+@{
+    ViewBag.Title = "_StudentPartial";
+}
+<div id="StudentElement@(Model.Index)">
+    <input type="text" 
+           id="Students_@(Model.Index)__Name" 
+           name="Students[@(Model.Index)].Name" 
+           value="@(Model.Student != null ? Model.Student.Name: "")">
+    <button class="removeStudent" data-id="@(Model.Index)" type="button">Remove</button>
+</div>
+
+

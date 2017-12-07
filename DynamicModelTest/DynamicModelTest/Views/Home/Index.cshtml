@@ -1,0 +1,34 @@
+﻿@using DynamicModelTest.Models
+@model DynamicModelTest.Models.MyDynamicModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<form method="POST" role="form" class="form-horizontal">
+    <div class="row">
+        <div class="col-lg-6">
+            <h1>Dynamically expand the Model, render HTML content and tie it to the new Model entries.</h1>
+            <p>Teacher:</p>
+            @Html.TextBoxFor(Model => Model.Teacher)
+            <p></p>
+            <p>Students:</p>
+            <div id="partialZone">
+                @for (int i = 0; i < Model.Students.Count; i++)
+                {
+                    Html.RenderPartial("_StudentPartial", new StudentPartialModel { Index = i, Student = Model.Students[i] });
+                }
+            </div>
+            <button type="button" id="AddButton">Add new student</button>
+
+            <div>
+                <button type="submit" class="btn btn-default">Submit!</button>
+            </div>
+        </div>      
+    </div>
+</form>
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("/Scripts/main.js")"></script>
+}
